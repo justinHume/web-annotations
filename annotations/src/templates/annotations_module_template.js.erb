@@ -1,0 +1,75 @@
+var EpubAnnotationsModule = function (contentDocumentDOM, bbPageSetView, annotationCSSUrl) {
+    
+    var EpubAnnotations = {};
+
+    // Rationale: The order of these matters
+    <%= text_line_inferrer %>
+    <%= highlight %>
+    <%= highlight_group %>
+    <%= underline %>
+    <%= underline_group %>
+    <%= bookmark %>
+    <%= reflowable_annotations %>
+    <%= annotations %>
+    <%= bookmark_view %>
+    <%= highlight_view %>
+    <%= underline_view %>
+    <%= image_annotation %>
+
+
+    var reflowableAnnotations = new EpubAnnotations.ReflowableAnnotations({
+        contentDocumentDOM : contentDocumentDOM, 
+        bbPageSetView : bbPageSetView,
+        annotationCSSUrl : "/css/annotations.css"
+    });
+
+    // Description: The public interface
+    return {
+
+        addSelectionHighlight : function (id, type) { 
+            return reflowableAnnotations.addSelectionHighlight(id, type); 
+        },
+        addSelectionBookmark : function (id, type) { 
+            return reflowableAnnotations.addSelectionBookmark(id, type); 
+        },
+        addSelectionImageAnnotation : function (id) {
+            return reflowableAnnotations.addSelectionImageAnnotation(id);
+        },
+        addHighlight : function (CFI, id, type) { 
+            return reflowableAnnotations.addHighlight(CFI, id, type); 
+        },
+        addBookmark : function (CFI, id, type) { 
+            return reflowableAnnotations.addBookmark(CFI, id, type);
+        },
+        addImageAnnotation : function (CFI, id) { 
+            return reflowableAnnotations.addImageAnnotation(CFI, id); 
+        },
+        redraw : function () { 
+            return reflowableAnnotations.redraw(); 
+        },
+        getBookmark : function (id) { 
+            return reflowableAnnotations.annotations.getBookmark(id); 
+        },
+        getBookmarks : function () { 
+            return reflowableAnnotations.annotations.getBookmarks(); 
+        }, 
+        getHighlight : function (id) { 
+            return reflowableAnnotations.annotations.getHighlight(id); 
+        },
+        getHighlights : function () { 
+            return reflowableAnnotations.annotations.getHighlights(); 
+        },
+        getUnderline : function (id) { 
+            return reflowableAnnotations.annotations.getUnderline(id); 
+        },
+        getUnderlines : function () { 
+            return reflowableAnnotations.annotations.getUnderlines();
+        },
+        getImageAnnotation : function () {
+
+        },
+        getImageAnnotations : function () {
+
+        }
+    };
+};
